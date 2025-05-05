@@ -28,8 +28,41 @@ const createUser = async (req, res) => {
   }
 };
 
+const assignProject = async (req, res) => {
+  const { userId, projectId } = req.body;
+  try {
+    if (!userId || !projectId) {
+      return res.status(400).send("User not found or Project not found");
+    }
+    const user = await userService.assignProject(userId, projectId);
+
+    res.json({ message: "Project assigned to user", user });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error assigning project to user");
+  }
+};
+
+const getUserByProjectId = async (req, res) => {
+  try {
+    const { projectId } = req.params;
+
+    if (!projectId) {
+      return res.status(400).send("Project ID is required");
+    }
+    const user = await userService.getUserByProjectId(projectId);
+
+    res.json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error fetching user by project ID");
+  }
+};
+
 module.exports = {
   getAllUsers,
   getUserById,
   createUser,
+  assignProject,
+  getUserByProjectId,
 };

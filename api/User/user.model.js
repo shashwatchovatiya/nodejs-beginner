@@ -20,6 +20,12 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  project_ids: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Project",
+    },
+  ],
 });
 
 const User = mongoose.model("User", userSchema);

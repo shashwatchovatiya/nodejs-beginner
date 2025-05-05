@@ -5,6 +5,9 @@ const projectSchema = new mongoose.Schema({
   startDate: { type: Date, required: true },
   endDate: { type: Date, required: true },
   is_Active: { type: Boolean, default: false },
+  is_Member: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
 });
 
-module.exports = projectSchema;
+const Project = mongoose.model("Project", projectSchema);
+
+module.exports = Project;

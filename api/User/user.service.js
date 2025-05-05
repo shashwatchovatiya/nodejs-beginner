@@ -12,8 +12,19 @@ const createUser = async (userData) => {
   return await userDao.createUser(userData);
 };
 
+const assignProject = async (userId, ProjectId) => {
+  return await userDao.assignProject(userId, ProjectId);
+};
+
+const getUserByProjectId = async (projectId) => {
+  if (!projectId) throw new Error("Project not found");
+  return await userDao.getUserByProjectId(projectId);
+};
+
 module.exports = {
   getAllUsers,
   getUserById,
   createUser,
+  assignProject,
+  getUserByProjectId,
 };
